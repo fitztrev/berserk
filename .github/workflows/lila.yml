@@ -7,12 +7,19 @@ on:
 jobs:
   lila:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
     container: ubuntu:22.04
     services:
       lila:
         image: ghcr.io/lichess-org/lila-docker:ci2
         options: --restart=always
     steps:
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
       - name: Checkout berserk
         uses: actions/checkout@v4
       - name: Run tests
