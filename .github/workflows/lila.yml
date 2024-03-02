@@ -15,8 +15,6 @@ jobs:
       lila:
         image: ghcr.io/lichess-org/lila-docker:ci2
         options: --restart=always
-        ports:
-          - 9663:9663
     steps:
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
